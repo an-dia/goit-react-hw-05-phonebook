@@ -33,16 +33,10 @@ export default class App extends Component {
     };
 
     if (this.state.contacts.some(contact => contact.name === name)) {
-      // alert(`${name} is already in contacts`);
-      // this.setState({ textAlert: `${name} is already in contacts` });
       this.showAlert(`${name} is already in contacts`);
     } else if (contact.name === '') {
-      // alert('Please enter your contact name!');
-      // this.setState({ textAlert: 'Please enter your contact name!' });
       this.showAlert('Please enter your contact name!');
     } else if (contact.number === '') {
-      // alert('Please enter the contact phone number!');
-      // this.setState({ textAlert: 'Please enter the contact phone number!' });
       this.showAlert('Please enter the contact phone number!');
     } else {
       this.setState(({ contacts }) => ({
@@ -52,8 +46,8 @@ export default class App extends Component {
   };
 
   showAlert = (text) => {
-  this.setState({error: true, textAlert: text})
-  setTimeout(() => this.setState({ error: false}), 2000);
+    this.setState({ error: true, textAlert: text });
+    setTimeout(() => this.setState({ error: false}), 2000);
  
 }
 
@@ -99,10 +93,7 @@ export default class App extends Component {
         <CSSTransition in={error} classNames={alertStyle} timeout={250} unmountOnExit>
           <Alert text={textAlert}/>
         </CSSTransition>
-        {/* <CSSTransition in ={true} appear={true} timeout={500} classNames={appearStyles} unmountOnExit> */}
         <Title title="Phonebook" level={1} />
-        {/* <h1 style={{color: 'cornflowerblue'}}>Phonebook</h1> */}
-        {/* </CSSTransition> */}
         <CSSTransition in={true} appear={true} timeout={500} classNames={appearFormStyles} unmountOnExit>
           <ContactForm onSubmit={this.addContact} />
         </CSSTransition>
