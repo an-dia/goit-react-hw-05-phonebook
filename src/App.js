@@ -54,6 +54,7 @@ export default class App extends Component {
   deleteContact = contactId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+      filter: '',
     }));
   };
 
@@ -65,8 +66,11 @@ export default class App extends Component {
   getVisibleContacts = () => {
     const { filter, contacts } = this.state;
     const normalizedFilter = filter.toLowerCase();
-
-    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+  //   const normalizedContacts = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+  //  console.log(normalizedContacts); 
+    let list = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+     if (!list.length) list = contacts;
+    return list
   };
 
   componentDidMount() {
@@ -85,9 +89,9 @@ export default class App extends Component {
   }
 
   render() {
-    const { filter, error, textAlert } = this.state;
+    const {contacts, filter, error, textAlert } = this.state;
     const visibleContacts = this.getVisibleContacts();
-
+    
     return (
       <Container>
         <CSSTransition in={error} classNames={alertStyle} timeout={250} unmountOnExit>
@@ -98,11 +102,11 @@ export default class App extends Component {
           <ContactForm onSubmit={this.addContact} />
         </CSSTransition>
         <Title title="Contacts" level={2} />
-        <CSSTransition in={visibleContacts.length !== 0} classNames={searchFadeStyles} timeout={500} unmountOnExit>
+        <CSSTransition in={contacts.length > 1} classNames={searchFadeStyles} timeout={500} unmountOnExit>
           <Filter value={filter} onChange={this.changeFilter} />
         </CSSTransition>
         <CSSTransition in={visibleContacts.length !== 0} classNames={fadeStyles} timeout={250} unmountOnExit>
-          <ContactList contacts={visibleContacts} onDeleteContact={this.deleteContact} />
+          <ContactList contacts={visibleContacts} filter={filter} onDeleteContact={this.deleteContact} />
         </CSSTransition>
       </Container>
     );

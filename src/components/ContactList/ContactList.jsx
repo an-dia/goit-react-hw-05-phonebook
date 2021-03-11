@@ -5,6 +5,7 @@ import fadeStyles from '../../transitionsStyles/fade.module.css';
 import ContactItem from '../ContactItem';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
+
   return (
     <TransitionGroup component="ul" className={s.contactList}>
       {contacts.map(({ name, number, id }) => (
