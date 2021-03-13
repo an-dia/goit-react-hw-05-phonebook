@@ -70,6 +70,9 @@ export default class App extends Component {
   //  console.log(normalizedContacts); 
     let list = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
     // if (!list.length) list = contacts
+    if (filter !== '' && list.length === 0) {
+      alert('Sorry, nothing was found for your request.');
+    }
     return list
   };
 
