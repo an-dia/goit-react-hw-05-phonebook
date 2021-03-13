@@ -69,7 +69,7 @@ export default class App extends Component {
   //   const normalizedContacts = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
   //  console.log(normalizedContacts); 
     let list = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
-     if (!list.length) list = contacts;
+    // if (!list.length) list = contacts
     return list
   };
 
